@@ -4,6 +4,7 @@ from abc import ABC
 
 from piicatcher.log_mixin import LogMixin
 from piicatcher.scanner import ColumnNameScanner, NERScanner, RegexScanner
+from piicatcher.piitypes import PiiCategories
 
 
 class NamedObject(ABC, LogMixin):
@@ -31,19 +32,19 @@ class NamedObject(ABC, LogMixin):
 
     def has_customer_data(self):
         for x in self._pii:
-            if x[0] == 'customer_data':
+            if x[0] == PiiCategories.CUSTOMER_DATA:
                 return True
         return False
 
     def has_customer_usage_data(self):
         for x in self._pii:
-            if x[0] == 'customer_usage_data':
+            if x[0] == PiiCategories.CUSTOMER_USAGE_DATA:
                 return True
         return False
 
     def has_authentication_data(self):
         for x in self._pii:
-            if x[0] == 'authentication_data':
+            if x[0] == PiiCategories.AUTHENTICATION_DATA:
                 return True
         return False
 

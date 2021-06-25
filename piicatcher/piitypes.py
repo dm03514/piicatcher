@@ -3,6 +3,12 @@ import json
 from enum import Enum, auto
 
 
+class PiiCategories(Enum):
+    CUSTOMER_DATA = auto()
+    CUSTOMER_USAGE_DATA = auto()
+    AUTHENTICATION_DATA = auto()
+
+
 class PiiTypes(Enum):
     """PiiTypes enumerates the different types of PII data"""
 
