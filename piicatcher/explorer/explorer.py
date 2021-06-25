@@ -65,7 +65,15 @@ class Explorer(ABC):
     @classmethod
     def output(cls, ns, explorer):
         if ns.catalog["format"] == "ascii_table":
-            headers = ["schema", "table", "column", "has_pii"]
+            headers = [
+                "schema",
+                "table",
+                "column",
+                "has_pii",
+                "has_customer_data",
+                "has_customer_usage_data",
+                "has_authentication_data",
+            ]
             tableprint.table(explorer.get_tabular(ns.list_all), headers)
         elif ns.catalog["format"] == "json":
             FileStore.save_schemas(explorer)
@@ -111,6 +119,9 @@ class Explorer(ABC):
                                 table.get_name(),
                                 column.get_name(),
                                 column.has_pii(),
+                                column.has_customer_data(),
+                                column.has_customer_usage_data(),
+                                column.has_authentication_data(),
                             ]
                         )
 

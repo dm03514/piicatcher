@@ -38,3 +38,24 @@ def as_enum(d):
         return getattr(PiiTypes, member)
     else:
         return d
+
+
+class CustomerDataTypes(Enum):
+    NONE = auto()
+    UNSUPPORTED = auto()
+    PHONE = auto()
+    EMAIL = auto()
+    CREDIT_CARD = auto()
+    ADDRESS = auto()
+    PERSON = auto()
+    LOCATION = auto()
+    BIRTH_DATE = auto()
+    GENDER = auto()
+    NATIONALITY = auto()
+    IP_ADDRESS = auto()
+    SSN = auto()
+    USER_NAME = auto()
+    PASSWORD = auto()
+
+
+

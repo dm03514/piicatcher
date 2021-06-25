@@ -29,6 +29,24 @@ class NamedObject(ABC, LogMixin):
         logging.debug("has_pii {} has {}".format(self, self._pii))
         return bool(self._pii)
 
+    def has_customer_data(self):
+        for x in self._pii:
+            if x[0] == 'customer_data':
+                return True
+        return False
+
+    def has_customer_usage_data(self):
+        for x in self._pii:
+            if x[0] == 'customer_usage_data':
+                return True
+        return False
+
+    def has_authentication_data(self):
+        for x in self._pii:
+            if x[0] == 'authentication_data':
+                return True
+        return False
+
     def get_pii_types(self):
         return self._pii
 
