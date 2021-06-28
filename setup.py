@@ -77,6 +77,7 @@ setup(
         "botocore",
         "click",
         "click-config-file",
+        "pandas",
         "snowflake-connector-python",
     ],
     dependency_links=[],

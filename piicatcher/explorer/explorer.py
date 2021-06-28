@@ -64,8 +64,7 @@ class Explorer(ABC):
 
     @classmethod
     def output(cls, ns, explorer):
-        if ns.catalog["format"] == "ascii_table":
-            headers = [
+        headers = [
                 "schema",
                 "table",
                 "column",
@@ -74,9 +73,13 @@ class Explorer(ABC):
                 "has_customer_usage_data",
                 "has_authentication_data",
             ]
+        if ns.catalog["format"] == "ascii_table":
             tableprint.table(explorer.get_tabular(ns.list_all), headers)
         elif ns.catalog["format"] == "json":
             FileStore.save_schemas(explorer)
+        elif ns.catalog["format"] == "csv":
+            print("Writing output as csv file")
+            FileStore.save_schemas_csv(explorer,ns,headers)
         elif ns.catalog["format"] == "db":
             DbStore.save_schemas(explorer)
 

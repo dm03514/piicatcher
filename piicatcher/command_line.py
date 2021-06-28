@@ -18,7 +18,7 @@ from piicatcher.explorer.sqlite import cli as sqlite_cli
 @click.option("-l", "--log-level", help="Logging Level", default="WARNING")
 @click.option(
     "--catalog-format",
-    type=click.Choice(["ascii_table", "json", "db", "glue"]),
+    type=click.Choice(["ascii_table", "json", "db", "glue","csv"]),
     default="ascii_table",
     help="Choose catalog format type",
 )
