@@ -110,6 +110,7 @@ def cli(
         exclude_table=exclude_table,
     )
 
+
     RelDbExplorer.dispatch(ns)
 
 

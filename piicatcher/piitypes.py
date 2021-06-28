@@ -3,6 +3,12 @@ import json
 from enum import Enum, auto
 
 
+class PiiCategories(Enum):
+    CUSTOMER_DATA = auto()
+    CUSTOMER_USAGE_DATA = auto()
+    AUTHENTICATION_DATA = auto()
+
+
 class PiiTypes(Enum):
     """PiiTypes enumerates the different types of PII data"""
 
@@ -38,3 +44,24 @@ def as_enum(d):
         return getattr(PiiTypes, member)
     else:
         return d
+
+
+class CustomerDataTypes(Enum):
+    NONE = auto()
+    UNSUPPORTED = auto()
+    PHONE = auto()
+    EMAIL = auto()
+    CREDIT_CARD = auto()
+    ADDRESS = auto()
+    PERSON = auto()
+    LOCATION = auto()
+    BIRTH_DATE = auto()
+    GENDER = auto()
+    NATIONALITY = auto()
+    IP_ADDRESS = auto()
+    SSN = auto()
+    USER_NAME = auto()
+    PASSWORD = auto()
+
+
+

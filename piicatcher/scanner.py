@@ -6,7 +6,7 @@ from abc import ABC, abstractmethod
 import spacy
 from commonregex import CommonRegex
 
-from piicatcher.piitypes import PiiTypes
+from piicatcher.piitypes import PiiTypes, CustomerDataTypes, PiiCategories
 
 
 # pylint: disable=too-few-public-methods
@@ -29,7 +29,7 @@ class RegexScanner(Scanner):
         if regex_result.phones:  # pylint: disable=no-member
             types.append(PiiTypes.PHONE)
         if regex_result.emails:  # pylint: disable=no-member
-            types.append(PiiTypes.EMAIL)
+            types.append(CustomerDataTypes.EMAIL)
         if regex_result.credit_cards:  # pylint: disable=no-member
             types.append(PiiTypes.CREDIT_CARD)
         if regex_result.street_addresses:  # pylint: disable=no-member
@@ -66,27 +66,27 @@ class NERScanner(Scanner):
 
 class ColumnNameScanner(Scanner):
     regex = {
-        PiiTypes.PERSON: re.compile(
+        (PiiCategories.CUSTOMER_DATA, CustomerDataTypes.PERSON): re.compile(
             "^.*(firstname|fname|lastname|lname|"
             "fullname|maidenname|_name|"
             "nickname|name_suffix|name).*$",
             re.IGNORECASE,
         ),
-        PiiTypes.EMAIL: re.compile("^.*(email|e-mail|mail).*$", re.IGNORECASE),
-        PiiTypes.BIRTH_DATE: re.compile(
+        (PiiCategories.CUSTOMER_DATA, CustomerDataTypes.EMAIL): re.compile("^.*(email|e-mail|mail).*$", re.IGNORECASE),
+        (PiiCategories.CUSTOMER_DATA, CustomerDataTypes.BIRTH_DATE): re.compile(
             "^.*(date_of_birth|dateofbirth|dob|"
             "birthday|date_of_death|dateofdeath).*$",
             re.IGNORECASE,
         ),
-        PiiTypes.GENDER: re.compile("^.*(gender).*$", re.IGNORECASE),
-        PiiTypes.NATIONALITY: re.compile("^.*(nationality).*$", re.IGNORECASE),
-        PiiTypes.ADDRESS: re.compile(
+        (PiiCategories.CUSTOMER_DATA, CustomerDataTypes.GENDER): re.compile("^.*(gender).*$", re.IGNORECASE),
+        (PiiCategories.CUSTOMER_DATA, CustomerDataTypes.NATIONALITY): re.compile("^.*(nationality).*$", re.IGNORECASE),
+        (PiiCategories.CUSTOMER_DATA, CustomerDataTypes.ADDRESS): re.compile(
             "^.*(address|city|state|county|country|" "zipcode|postal|zone|borough).*$",
             re.IGNORECASE,
         ),
-        PiiTypes.USER_NAME: re.compile("^.*user(id|name|).*$", re.IGNORECASE),
-        PiiTypes.PASSWORD: re.compile("^.*pass.*$", re.IGNORECASE),
-        PiiTypes.SSN: re.compile("^.*(ssn|social).*$", re.IGNORECASE),
+        (PiiCategories.CUSTOMER_DATA, CustomerDataTypes.USER_NAME): re.compile("^.*user(id|name|).*$", re.IGNORECASE),
+        (PiiCategories.CUSTOMER_DATA, CustomerDataTypes.PASSWORD): re.compile("^.*pass.*$", re.IGNORECASE),
+        (PiiCategories.CUSTOMER_DATA, CustomerDataTypes.SSN): re.compile("^.*(ssn|social).*$", re.IGNORECASE),
     }
 
     def scan(self, text):
